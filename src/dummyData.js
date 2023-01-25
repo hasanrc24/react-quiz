@@ -15,7 +15,7 @@ export const data = [
     id: "3",
     question: "What is the capital of India",
     options: ["Delhi", "New York", "Mumbai", "Dhaka"],
-    answer: "Paris",
+    answer: "Delhi",
   },
   {
     id: "4",

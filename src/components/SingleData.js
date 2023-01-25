@@ -4,16 +4,22 @@ import { data } from "../dummyData";
 const SingleData = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answer, setAnswer] = useState([]);
+  const [score, setScore] = useState(0);
 
   const handleAnswer = (e) => {
     setAnswer([...answer, e.target.innerText]);
     setCurrentQuestion(currentQuestion + 1);
+    e.target.innerText === data[currentQuestion].answer && setScore(score + 1);
   };
-  // console.log(answer);
+  // console.log(score);
   return (
     <div>
-      <p className="text-center mx-auto">Simple React Quiz</p>
-      <div className={currentQuestion < data.length ? `flex gap-4` : "flex"}>
+      <p className="text-center mx-auto text-2xl">Simple React Quiz</p>
+      <div
+        className={
+          currentQuestion < data.length ? `flex gap-4` : "flex justify-center"
+        }
+      >
         <div className="flex flex-col items-center justify-center">
           <p>{data[currentQuestion]?.question}</p>
           {currentQuestion < data.length && (
@@ -22,12 +28,18 @@ const SingleData = () => {
         </div>
         <div className="">
           {currentQuestion >= data.length ? (
-            <button
-              onClick={() => setCurrentQuestion(0)}
-              className="bg-slate-600 hover:bg-slate-800 my-3 p-2 rounded-md"
-            >
-              Go back
-            </button>
+            <div className="text-center">
+              <p className="text-xl my-4">Your score is: {score}</p>
+              <button
+                onClick={() => {
+                  setCurrentQuestion(0);
+                  setScore(0);
+                }}
+                className="bg-slate-600 hover:bg-slate-800 my-3 p-2 rounded-md"
+              >
+                Go back
+              </button>
+            </div>
           ) : (
             data[currentQuestion]?.options?.map((option, i) => {
               return (
