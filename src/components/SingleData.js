@@ -11,6 +11,8 @@ const SingleData = () => {
     setCurrentQuestion(currentQuestion + 1);
     e.target.innerText === data[currentQuestion].answer && setScore(score + 1);
   };
+
+  const percentage = ((currentQuestion + 1) / data.length) * 100;
   // console.log(score);
   return (
     <div>
@@ -53,6 +55,16 @@ const SingleData = () => {
               );
             })
           )}
+        </div>
+      </div>
+      <div
+        className={`text-center ${currentQuestion >= data.length && "hidden"}`}
+      >
+        <div className="w-full bg-gray-200 h-1 mb-6">
+          <div
+            className="bg-green-500 h-1 transition-all duration-300"
+            style={{ width: `${percentage}%` }}
+          ></div>
         </div>
       </div>
     </div>
