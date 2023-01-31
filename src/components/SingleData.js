@@ -8,7 +8,6 @@ const SingleData = () => {
 
   const handleAnswer = (e) => {
     setAnswer([...answer, e.target.innerText]);
-    setCurrentQuestion(currentQuestion + 1);
     e.target.innerText === data[currentQuestion].answer && setScore(score + 1);
   };
 
@@ -46,7 +45,7 @@ const SingleData = () => {
             data[currentQuestion]?.options?.map((option, i) => {
               return (
                 <button
-                  className="block bg-slate-600 hover:bg-slate-800 my-3 p-2 w-full rounded-md"
+                  className="block bg-slate-600 hover:bg-slate-800 my-3 p-2 w-full rounded-md focus:bg-slate-800"
                   key={i}
                   onClick={handleAnswer}
                 >
@@ -58,7 +57,29 @@ const SingleData = () => {
         </div>
       </div>
       <div
-        className={`text-center ${currentQuestion >= data.length && "hidden"}`}
+        className={`flex justify-between ${
+          currentQuestion >= data.length && "hidden"
+        }`}
+      >
+        <button
+          className=" mb-2 px-4 py-2 bg-neutral-800 rounded-lg"
+          onClick={() => setCurrentQuestion(currentQuestion - 1)}
+          disabled={currentQuestion === 0 ? true : false}
+        >
+          Previous
+        </button>
+        <button
+          className=" mb-2 px-4 py-2 bg-neutral-800 rounded-lg"
+          onClick={() => setCurrentQuestion(currentQuestion + 1)}
+          disabled={currentQuestion === data.length ? true : false}
+        >
+          Next
+        </button>
+      </div>
+      <div
+        className={`text-center mt-2 ${
+          currentQuestion >= data.length && "hidden"
+        }`}
       >
         <div className="w-full bg-gray-200 h-1 mb-6">
           <div
